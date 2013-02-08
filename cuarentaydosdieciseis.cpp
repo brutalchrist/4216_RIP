@@ -15,6 +15,9 @@ cuarentaydosdieciseis::cuarentaydosdieciseis(QWidget *parent) :
     QTextCodec::setCodecForCStrings(linuxCodec);
     QTextCodec::setCodecForLocale(linuxCodec);
 
+    //Se deja con tamaño fijo
+    this->setFixedSize(this->width(), this->height());
+
     ui->tabla->setVisible(false);
 }
 
