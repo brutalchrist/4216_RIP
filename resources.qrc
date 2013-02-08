@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>imagenes/logoGiro.png</file>
+    </qresource>
+</RCC>
