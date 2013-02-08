@@ -33,7 +33,17 @@
      <set>Qt::NoTextInteraction</set>
     </property>
    </widget>
-   <widget class="QTreeView" name="tabla">
+   <widget class="QTreeView" name="tablaTrabajos">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>10</y>
+      <width>811</width>
+      <height>401</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QTreeView" name="tablaClientes">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -71,16 +81,16 @@
      <string>Clientes</string>
     </property>
     <addaction name="actionNuevoCliente"/>
-    <addaction name="actionEliminarCliente"/>
     <addaction name="actionEditarCliente"/>
+    <addaction name="actionEliminarCliente"/>
    </widget>
    <widget class="QMenu" name="menuBicicletas">
     <property name="title">
      <string>Bicicletas</string>
     </property>
     <addaction name="actionNuevaBicicleta"/>
-    <addaction name="actionEliminarBicicleta"/>
     <addaction name="actionEditarBicicleta"/>
+    <addaction name="actionEliminarBicicleta"/>
    </widget>
    <widget class="QMenu" name="menuTrabajos">
     <property name="title">
