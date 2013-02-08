@@ -1,5 +1,6 @@
 #include "cuarentaydosdieciseis.h"
 #include "ui_cuarentaydosdieciseis.h"
+#include <QStringListModel>
 
 //NOTA: apt-get install libqt4-sql-mysql
 
@@ -19,7 +20,7 @@ cuarentaydosdieciseis::cuarentaydosdieciseis(QWidget *parent) :
     this->setFixedSize(this->width(), this->height());
 
     ui->tablaTrabajos->setVisible(false);
-    ui->tablaClientes->setVisible(false);
+    ui->tablaClientesEditar->setVisible(false);
 }
 
 cuarentaydosdieciseis::~cuarentaydosdieciseis()
@@ -52,7 +53,7 @@ void cuarentaydosdieciseis::desconectarMysql(){
 }
 
 void cuarentaydosdieciseis::ocultarTablas(){
-    ui->tablaClientes->hide();
+    ui->tablaClientesEditar->hide();
     ui->tablaTrabajos->hide();
 }
 
@@ -91,12 +92,11 @@ void cuarentaydosdieciseis::on_actionEditarCliente_triggered()
     if(conectarMysql()){
         QSqlQueryModel *modelo = new QSqlQueryModel;
 
-        modelo->setQuery("select * from usuario where idTipo = 2");
+        modelo->setQuery("select rut, nombres, apellidoPaterno, apellidoMaterno from usuario where idTipo = 2");
 
-        ui->tablaClientes->setModel(modelo);
+        ui->tablaClientesEditar->setModel(modelo);
         ocultarTablas();
-        ui->tablaClientes->show();
-
+        ui->tablaClientesEditar->show();
     }
     else{
         errorMsg("No se pudo conectar a la base de datos");
@@ -167,7 +167,7 @@ void cuarentaydosdieciseis::on_tablaTrabajos_doubleClicked(const QModelIndex &in
         ventanaImagen(index.data().toString());
 }
 
-void cuarentaydosdieciseis::on_tablaClientes_doubleClicked(const QModelIndex &index)
+void cuarentaydosdieciseis::on_tablaClientesEditar_doubleClicked(const QModelIndex &index)
 {
     infoMsg("Editar cliente");
 }

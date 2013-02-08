@@ -39,28 +39,21 @@ private slots:
     void on_actionPendientesTrabajo_triggered();
     void on_actionEditarCliente_triggered();
     void on_actionCerrar_2_triggered();
+    void on_actionNuevoCliente_triggered();
+    void on_actionEliminarCliente_triggered();
+    void on_actionNuevaBicicleta_triggered();
+    void on_actionEditarBicicleta_triggered();
+    void on_actionEliminarBicicleta_triggered();
+    void on_actionNuevoTrabajo_triggered();
+    void on_actionEntregarTrabajo_triggered();
+    void on_actionHistorialTrabajo_triggered();
+    void on_actionAcerca_de_triggered();
 
     /*Eventos tablas*/
     void on_tablaTrabajos_doubleClicked(const QModelIndex &index);
-    void on_tablaClientes_doubleClicked(const QModelIndex &index);
+    void on_tablaClientesEditar_doubleClicked(const QModelIndex &index);
 
-    void on_actionNuevoCliente_triggered();
 
-    void on_actionEliminarCliente_triggered();
-
-    void on_actionNuevaBicicleta_triggered();
-
-    void on_actionEditarBicicleta_triggered();
-
-    void on_actionEliminarBicicleta_triggered();
-
-    void on_actionNuevoTrabajo_triggered();
-
-    void on_actionEntregarTrabajo_triggered();
-
-    void on_actionHistorialTrabajo_triggered();
-
-    void on_actionAcerca_de_triggered();
 
 private:
     Ui::cuarentaydosdieciseis *ui;
