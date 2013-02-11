@@ -55,6 +55,7 @@ void cuarentaydosdieciseis::ocultarTablas(){
     ui->tablaClientesEditar->hide();
     ui->tablaClientesEliminar->hide();
     ui->tablaTrabajos->hide();
+    ui->grupoNuevoCliente->hide();
 }
 
 /*Pop-up*/
@@ -94,7 +95,9 @@ void cuarentaydosdieciseis::on_actionNuevoCliente_triggered()
 {
     this->setWindowTitle("Nuevo cliente - Cuarentaydos Dieciséis");
 
-    infoMsg("Nuevo cliente");
+    //infoMsg("Nuevo cliente");
+    ocultarTablas();
+    ui->grupoNuevoCliente->show();
 }
 
 void cuarentaydosdieciseis::on_actionEditarCliente_triggered()
@@ -173,7 +176,6 @@ void cuarentaydosdieciseis::on_actionPendientesTrabajo_triggered()
         ui->tablaTrabajos->setModel(modelo);
         ocultarTablas();
         ui->tablaTrabajos->show();
-
     }
     else{
         errorMsg("No se pudo conectar a la base de datos");
