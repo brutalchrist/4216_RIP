@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Cuarentaydos Dieciseis</string>
+   <string>Cuarentaydos Dieciséis</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QLabel" name="label">
@@ -44,6 +44,16 @@
     </property>
    </widget>
    <widget class="QTreeView" name="tablaClientesEditar">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>10</y>
+      <width>811</width>
+      <height>401</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QTreeView" name="tablaClientesEliminar">
     <property name="geometry">
      <rect>
       <x>20</x>

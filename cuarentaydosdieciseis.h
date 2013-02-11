@@ -34,6 +34,7 @@ private slots:
     void errorMsg(QString msg);
     void infoMsg(QString msg);
     void ventanaImagen(QString url);
+    bool siNoMsg(QString titulo, QString msg);
 
     /*Eventos menu*/
     void on_actionPendientesTrabajo_triggered();
@@ -52,6 +53,8 @@ private slots:
     /*Eventos tablas*/
     void on_tablaTrabajos_doubleClicked(const QModelIndex &index);
     void on_tablaClientesEditar_doubleClicked(const QModelIndex &index);
+    void on_tablaClientesEliminar_doubleClicked(const QModelIndex &index);
+
 
 
 
