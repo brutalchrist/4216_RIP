@@ -8,6 +8,7 @@
 #include <QtSql/QtSql>
 #include <QtSql/qsqldatabase.h>
 #include <QtSql/QSqlError>
+#include <QCryptographicHash>
 
 namespace Ui {
 class cuarentaydosdieciseis;
@@ -57,6 +58,8 @@ private slots:
 
 
 
+
+    void on_botonEditarCliente_clicked();
 
 private:
     Ui::cuarentaydosdieciseis *ui;

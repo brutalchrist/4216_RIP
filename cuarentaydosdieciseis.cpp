@@ -56,6 +56,7 @@ void cuarentaydosdieciseis::ocultarTablas(){
     ui->tablaClientesEliminar->hide();
     ui->tablaTrabajos->hide();
     ui->grupoNuevoCliente->hide();
+    ui->grupoEditarCliente->hide();
 }
 
 /*Pop-up*/
@@ -198,7 +199,7 @@ void cuarentaydosdieciseis::on_actionHistorialTrabajo_triggered()
 
 void cuarentaydosdieciseis::on_actionAcerca_de_triggered()
 {   
-    infoMsg("Acerca de");
+    QMessageBox::about(this, "Acerca de", "Este es el acerca de");
 }
 
 /*Eventos tablas*/
@@ -210,7 +211,61 @@ void cuarentaydosdieciseis::on_tablaTrabajos_doubleClicked(const QModelIndex &in
 
 void cuarentaydosdieciseis::on_tablaClientesEditar_doubleClicked(const QModelIndex &index)
 {
-    infoMsg("Editar cliente");
+    this->setWindowTitle(QString("Editando " + index.data(1).toString() + " - Cuarentaydos Dieciséis"));
+
+    if(conectarMysql()){
+        QSqlQuery query;
+
+        QString sql = "select * from usuario where rut = '" + index.sibling(index.row(), 0).data().toString() + "'";
+
+        query.exec(sql);
+
+        while(query.next()){
+            ui->rutClienteEditar->setText(query.value(0).toString());
+            ui->nombreClienteEditar->setText(query.value(1).toString());
+            ui->apellidoPClienteEditar->setText(query.value(2).toString());
+            ui->apellidoMClienteEditar->setText(query.value(3).toString());
+            ui->loginClienteEditar->setText(query.value(4).toString());
+            ui->telefonoClienteEditar->setText(query.value(6).toString());
+            ui->movilClienteEditar->setText(query.value(7).toString());
+            ui->mailClienteEditar->setText(query.value(8).toString());;
+        }
+
+        ocultarTablas();
+        ui->grupoEditarCliente->show();
+
+    }
+    else{
+        errorMsg("No se pudo conectar a la base de datos");
+    }
+}
+
+void cuarentaydosdieciseis::on_botonEditarCliente_clicked()
+{
+    /*Update de los datos del grupo grupoEditarCliente*/
+
+    QString sql = "update usuario set nombres = '"+ui->nombreClienteEditar->text()+"', apellidoPaterno ='"+ui->apellidoPClienteEditar->text()
+            +"', apellidoMaterno = '"+ui->apellidoMClienteEditar->text()+"', login = '"+ui->loginClienteEditar->text()+"', telefonoFijo = '"+
+            ui->telefonoClienteEditar->text()+"', telefonoMovil = '"+ui->movilClienteEditar->text()+"', email = '"+ui->mailClienteEditar->text()+"'";
+
+    if(ui->passwordClienteEditar->text().isEmpty()){
+        sql += " where rut = '"+ui->rutClienteEditar->text()+"'";
+    }
+    else{
+        sql += ", password = '"+QCryptographicHash::hash(ui->passwordClienteEditar->text().toLatin1(), QCryptographicHash::Md5).toHex()+"' where rut = '"+ui->rutClienteEditar->text()+"'";
+    }
+
+    if(siNoMsg("Editar", "¿Son correctos los datos ingresados?")){
+        QSqlQuery query;
+
+        if(query.exec(sql)){
+            infoMsg("El usuario a sido editado correctamente");
+            on_actionEditarCliente_triggered();
+        }
+        else{
+            errorMsg("El usuario no a sido editado");
+        }
+    }
 }
 
 void cuarentaydosdieciseis::on_tablaClientesEliminar_doubleClicked(const QModelIndex &index)
@@ -224,7 +279,7 @@ void cuarentaydosdieciseis::on_tablaClientesEliminar_doubleClicked(const QModelI
 
             if(query.exec(sql1) && query.exec(sql2)){
                 infoMsg("El usuario a sido eliminado correctamente");
-                /*TODO: resfrescar el treeviwe*/
+                on_actionEliminarCliente_triggered();
             }
             else{
                 errorMsg("El usuario no a sido eliminado");
@@ -235,4 +290,6 @@ void cuarentaydosdieciseis::on_tablaClientesEliminar_doubleClicked(const QModelI
         }
     }
 }
+
+
 
