@@ -96,9 +96,43 @@ void cuarentaydosdieciseis::on_actionNuevoCliente_triggered()
 {
     this->setWindowTitle("Nuevo cliente - Cuarentaydos Dieciséis");
 
-    //infoMsg("Nuevo cliente");
     ocultarTablas();
     ui->grupoNuevoCliente->show();
+}
+
+void cuarentaydosdieciseis::on_botonEnviarCliente_clicked()
+{
+    QString sql = "insert into usuario value (";
+    QSqlQuery query;
+
+    if(!ui->rutCliente->text().isEmpty() && !ui->nombreCliente->text().isEmpty() && !ui->apellidoPCliente->text().isEmpty() &&
+            !ui->apellidoMCliente->text().isEmpty() && !ui->loginCliente->text().isEmpty() && !ui->passwordCliente->text().isEmpty()){
+        if(!ui->movilCliente->text().isEmpty() || !ui->telefonoCliente->text().isEmpty()){
+
+            sql += "'" + ui->rutCliente->text() + "', "+"'" + ui->nombreCliente->text() + "', "+"'" + ui->apellidoPCliente->text() + "', "+
+                    "'" + ui->apellidoMCliente->text() + "', "+"'" + ui->loginCliente->text() + "', "+"'" +
+                    QCryptographicHash::hash(ui->passwordCliente->text().toLatin1(), QCryptographicHash::Md5).toHex() + "', "+
+                    "'" + ui->telefonoCliente->text() + "', "+"'" + ui->movilCliente->text() + "', "+"'" + ui->mailCliente->text() + "', '2')";
+
+            if(conectarMysql()){
+                if(query.exec(sql)){
+                    infoMsg("El usuario a sido ingresado correctamente");
+                    ocultarTablas();
+                }
+                else
+                    errorMsg("El usuario no pudo ser ingresado");
+            }
+            else{
+                errorMsg("No se pudo conectar a la base de datos");
+            }
+        }
+        else{
+            advertenciaMsg("Se debe ingresar al menos un contacto telefónico ");
+        }
+    }
+    else{
+        advertenciaMsg("Los campos RUT, Nombres, Apellido Paterno, Apellido Materno, Login y Password no deben estar vacíos ");
+    }
 }
 
 void cuarentaydosdieciseis::on_actionEditarCliente_triggered()
@@ -242,8 +276,6 @@ void cuarentaydosdieciseis::on_tablaClientesEditar_doubleClicked(const QModelInd
 
 void cuarentaydosdieciseis::on_botonEditarCliente_clicked()
 {
-    /*Update de los datos del grupo grupoEditarCliente*/
-
     QString sql = "update usuario set nombres = '"+ui->nombreClienteEditar->text()+"', apellidoPaterno ='"+ui->apellidoPClienteEditar->text()
             +"', apellidoMaterno = '"+ui->apellidoMClienteEditar->text()+"', login = '"+ui->loginClienteEditar->text()+"', telefonoFijo = '"+
             ui->telefonoClienteEditar->text()+"', telefonoMovil = '"+ui->movilClienteEditar->text()+"', email = '"+ui->mailClienteEditar->text()+"'";
@@ -290,6 +322,4 @@ void cuarentaydosdieciseis::on_tablaClientesEliminar_doubleClicked(const QModelI
         }
     }
 }
-
-
 

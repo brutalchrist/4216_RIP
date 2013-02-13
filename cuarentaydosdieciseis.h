@@ -61,6 +61,8 @@ private slots:
 
     void on_botonEditarCliente_clicked();
 
+    void on_botonEnviarCliente_clicked();
+
 private:
     Ui::cuarentaydosdieciseis *ui;
 };
