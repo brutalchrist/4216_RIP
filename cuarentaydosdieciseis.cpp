@@ -54,9 +54,12 @@ void cuarentaydosdieciseis::desconectarMysql(){
 void cuarentaydosdieciseis::ocultarTablas(){
     ui->tablaClientesEditar->hide();
     ui->tablaClientesEliminar->hide();
+    ui->tablaBicicletasEditar->hide();
     ui->tablaTrabajos->hide();
+
     ui->grupoNuevoCliente->hide();
     ui->grupoEditarCliente->hide();
+    ui->grupoEditarBicicleta->hide();
 }
 
 /*Pop-up*/
@@ -182,7 +185,18 @@ void cuarentaydosdieciseis::on_actionEditarBicicleta_triggered()
 {
     this->setWindowTitle("Editar bicicleta - Cuarentaydos Dieciséis");
 
-    infoMsg("Editar bicicleta");
+    if(conectarMysql()){
+        QSqlQueryModel *modelo = new QSqlQueryModel;
+
+        modelo->setQuery("select idBicicleta, descripcion, urlFoto, rutUsuario from bicicleta");
+
+        ui->tablaBicicletasEditar->setModel(modelo);
+        ocultarTablas();
+        ui->tablaBicicletasEditar->show();
+    }
+    else{
+        errorMsg("No se pudo conectar a la base de datos");
+    }
 }
 
 void cuarentaydosdieciseis::on_actionEliminarBicicleta_triggered()
@@ -241,6 +255,17 @@ void cuarentaydosdieciseis::on_tablaTrabajos_doubleClicked(const QModelIndex &in
 {
     if(index.column() == 2)
         ventanaImagen(index.data().toString());
+}
+
+void cuarentaydosdieciseis::on_tablaBicicletasEditar_doubleClicked(const QModelIndex &index)
+{
+    if(index.column() == 2)
+        ventanaImagen(index.data().toString());
+    else{
+        ocultarTablas();
+        ui->grupoEditarBicicleta->show();
+    }
+
 }
 
 void cuarentaydosdieciseis::on_tablaClientesEditar_doubleClicked(const QModelIndex &index)
@@ -323,3 +348,9 @@ void cuarentaydosdieciseis::on_tablaClientesEliminar_doubleClicked(const QModelI
     }
 }
 
+
+void cuarentaydosdieciseis::on_botonBuscarImagen_clicked()
+{
+    QString imagen = QFileDialog::getOpenFileName(this, tr("Abrir"), QDir::homePath(), tr("(*.png *.PNG *.jpg *.JPG *.jpeg *.JPEG)"));
+    ui->urlImagen->setText(imagen);
+}

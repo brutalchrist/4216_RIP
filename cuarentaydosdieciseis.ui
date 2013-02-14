@@ -495,6 +495,65 @@
      </layout>
     </widget>
    </widget>
+   <widget class="QTreeView" name="tablaBicicletasEditar">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>10</y>
+      <width>811</width>
+      <height>401</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QGroupBox" name="grupoEditarBicicleta">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>10</y>
+      <width>811</width>
+      <height>401</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: #ededed;</string>
+    </property>
+    <property name="title">
+     <string/>
+    </property>
+    <widget class="QWidget" name="">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>300</y>
+       <width>341</width>
+       <height>35</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QLabel" name="label_20">
+        <property name="text">
+         <string>Imagen:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="urlImagen">
+        <property name="styleSheet">
+         <string notr="true">background-color: #FFF;</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="botonBuscarImagen">
+        <property name="text">
+         <string>Buscar</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">

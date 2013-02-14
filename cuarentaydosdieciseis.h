@@ -9,6 +9,7 @@
 #include <QtSql/qsqldatabase.h>
 #include <QtSql/QSqlError>
 #include <QCryptographicHash>
+#include <QFileDialog>
 
 namespace Ui {
 class cuarentaydosdieciseis;
@@ -55,13 +56,12 @@ private slots:
     void on_tablaTrabajos_doubleClicked(const QModelIndex &index);
     void on_tablaClientesEditar_doubleClicked(const QModelIndex &index);
     void on_tablaClientesEliminar_doubleClicked(const QModelIndex &index);
+    void on_tablaBicicletasEditar_doubleClicked(const QModelIndex &index);
 
-
-
-
+    /*Eventos botones*/
     void on_botonEditarCliente_clicked();
-
     void on_botonEnviarCliente_clicked();
+    void on_botonBuscarImagen_clicked();
 
 private:
     Ui::cuarentaydosdieciseis *ui;
